@@ -12,10 +12,6 @@
 	],
 	"Plugins": [
 		{
-			"Name": "HoudiniEngine",
-			"Enabled": true
-		},
-		{
 			"Name": "Niagara",
 			"Enabled": true
 		}

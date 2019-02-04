@@ -15,10 +15,6 @@
 	],
 	"Plugins": [
 		{
-			"Name": "HoudiniEngine",
-			"Enabled": false
-		},
-		{
 			"Name": "SoundUtilities",
 			"Enabled": true
 		},
