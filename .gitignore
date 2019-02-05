@@ -2,5 +2,6 @@
 Build/
 Binaries/
 Intermediate/
+DerivedDataCache/
 *.sln
 Saved/
