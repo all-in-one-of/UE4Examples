@@ -22,7 +22,7 @@ Add(FGuid(0x5B8FC679, 0x51CE4082, 0x9D777BEE, 0xF4F72C44), TEXT("SubsurfaceColor
 Add(FGuid(0x9E502E69, 0x3C8F48FA, 0x94645CFD, 0x28E5428D), TEXT("ClearCoat"),              MP_CustomData0,             MCT_Float,   FVector4(1,0,0,0),  SF_Pixel);
 Add(FGuid(0xBE4F2FFD, 0x12FC4296, 0xB0124EEA, 0x12C28D92), TEXT("ClearCoatRoughness"),     MP_CustomData1,             MCT_Float,   FVector4(.1,0,0,0), SF_Pixel);
 Add(FGuid(0xE8EBD0AD, 0xB1654CBE, 0xB079C3A8, 0xB39B9F15), TEXT("AmbientOcclusion"),       MP_AmbientOcclusion,        MCT_Float,   FVector4(1,0,0,0),  SF_Pixel);
-Add(FGuid(0xD0B0FA03, 0x14D74455, 0xA851BAC5, 0x81A0788B), TEXT("Refraction"),             MP_Refraction,               MCT_Float2, FVector4(1,0,0,0),  SF_Pixel);
+Add(FGuid(0xD0B0FA03, 0x14D74455, 0xA851BAC5, 0x81A0788B), TEXT("Refraction"),             MP_Refraction,              MCT_Float2, FVector4(1,0,0,0),  SF_Pixel);
 Add(FGuid(0x0AC97EC3, 0xE3D047BA, 0xB610167D, 0xC4D919FF), TEXT("PixelDepthOffset"),       MP_PixelDepthOffset,        MCT_Float,   FVector4(0,0,0,0),  SF_Pixel);
 ```
 
