@@ -3,6 +3,8 @@
 This example contains a level named Geometry that contains scene geometry used in different lighting
 setups.
 
+A Post Processing volume is set around the geometry to give all levels a consistent set of post processing settings.
+
 
 ## LightingScenarios Level
 This level demonstrates the use of [Precomputed Lighting Scenarios](https://docs.unrealengine.com/en-us/Engine/Rendering/LightingAndShadows/PrecomputedLightingScenarios),
@@ -25,3 +27,12 @@ To test the different lighting scenarios in the editor, make either Scenario1_Li
 Don't leave both enabled at the same time or the lighting will not be what you expect.
 
 To cycle between lighting scenarios during play, press L.
+
+## Dynamic Lighting
+
+The Dynamic Lighting scene is lit with a Directional Light and SkyLight. A Sky Sphere is used to give the SkyLight something interesting to sample from.
+
+
+[Distance Field Ambient Occlusion](https://docs.unrealengine.com/en-us/Engine/Rendering/LightingAndShadows/DistanceFieldAmbientOcclusion) is enabled in this
+project. To adjust the DFAO, see the settings under the SkyLight actor.
+
