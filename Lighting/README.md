@@ -36,3 +36,12 @@ The Dynamic Lighting scene is lit with a Directional Light and SkyLight. A Sky S
 [Distance Field Ambient Occlusion](https://docs.unrealengine.com/en-us/Engine/Rendering/LightingAndShadows/DistanceFieldAmbientOcclusion) is enabled in this
 project. To adjust the DFAO, see the settings under the SkyLight actor.
 
+## Eye Adaptation
+
+When you play this scene the HDR visualizer is diplayed and then the intesity of the level's direction light is animated from
+120000 lux to 0. The scene uses eye adaptation and the HDR visualizer shows you the exposure compensation that's happening.
+
+This scene is also interesting to use in editor mode. Enable HDR vizualier with `ShowFlag.VisualizeHDR 1` and then scrub around the intensity of
+the directional light. You can also play with the Eye Adaptation exposure compensation settings on the Post Processing Volume to see how that
+effects the exposure compensation (which the HDR visualizer helps you to understand).
+
