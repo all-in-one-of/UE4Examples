@@ -24,3 +24,7 @@ Here's what the Geometry Spreadsheet should look like after you've set two diffe
 
 ![Geometry Spreadhsheet](https://github.com/drichardson/UE4Examples/blob/master/HoudiniLandscapeTest/geometry_spreadsheet.png)
 
+Here's what the layer info should look like with a physical material set:
+
+![Layer Info with Physical Material Set](https://github.com/drichardson/UE4Examples/blob/master/HoudiniLandscapeTest/layer_info.png)
+
