@@ -18,9 +18,9 @@ material to. The value of the attribute should be a string reference to the phys
 
 Here's an example Attribute Create node in Houdini:
 
-![Attribute Create](/attributes.png)
+![Attribute Create](https://github.com/drichardson/UE4Examples/blob/master/HoudiniLandscapeTest/attributes.png)
 
 Here's what the Geometry Spreadsheet should look like after you've set two different physical materials on two different layers:
 
-![Geometry Spreadhsheet](/geometry-spreadsheet.png)
+![Geometry Spreadhsheet](https://github.com/drichardson/UE4Examples/blob/master/HoudiniLandscapeTest/geometry_spreadsheet.png)
 
