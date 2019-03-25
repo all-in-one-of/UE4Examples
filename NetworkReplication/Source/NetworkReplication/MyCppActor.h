@@ -1,43 +1,61 @@
 #pragma once
 
 #include "CoreMinimal.h"
+#include "GameFramework/Actor.h"
+
 #include "MyCppActor.generated.h"
 
+USTRUCT(BlueprintType)
 struct FMyStruct
 {
-  int IntValue;
-  float FloatValue;
-}
+	GENERATED_BODY()
 
-UCLASS()
-class MyCppActor : public AActor
+	int IntValue;
+	float FloatValue;
+};
+
+UCLASS(BlueprintType)
+class AMyCppActor : public AActor
 {
+	GENERATED_BODY()
+
+private:
+
+	void GetLifetimeReplicatedProps(TArray < FLifetimeProperty > & OutLifetimeProps) const override;
+	void Tick(float DeltaSeconds) override;
+
+	// IntValue is used to determine when properties update.
+	int LastIntValue;
+
 public:
 
-  UPROPERTY(Transient, Replicated)
-  int IntValue = 1;
+	UPROPERTY(Replicated)
+	int IntValue = 1;
 
-  UPROPERTY(Transient, Replicated)
-  float FloatValue 3.14;
+	UPROPERTY(Transient, Replicated)
+	float FloatValue = 3.14f;
 
-  UPROPERTY(Transient, Replicated)
-  FVector VectorValue = FVector(1.1,2.2,3.3);
+	UPROPERTY(Transient, Replicated)
+	FVector VectorValue = FVector(1.1,2.2,3.3);
 
-  UPROPERTY(Transient, Replicated)
-  bool BoolValue = true;
+	UPROPERTY(Transient, Replicated)
+	bool BoolValue = true;
 
-  UPROPERTY(Transient, Replicated)
-  FName FNameValue = FName("MyFName");
+	UPROPERTY(Transient, Replicated)
+	FName FNameValue = FName("MyFName");
 
-  UPROPERTY(Transient, Replicated)
-  FString FStringValue = FString("MyFString");
+	UPROPERTY(Transient, Replicated)
+	FString FStringValue = FString("MyFString");
 
-  UPROPERTY(Transient, Replicated)
-  FText FTextValue = TEXT("My Text");
+	UPROPERTY(Transient, Replicated)
+	FText FTextValue = FText::FromString(TEXT("My Text"));
 
-  UPROPERTY(Transient, Replicated)
-  FMyStruct MyStructValue = { 10, 20.2 };
+	UPROPERTY(Transient, Replicated)
+	FMyStruct MyStructValue = { 10, 20.2 };
 
 
-  void ChangeValues();
+	UFUNCTION(BlueprintCallable)
+	void ChangeValues();
+
+	AMyCppActor();
 };
