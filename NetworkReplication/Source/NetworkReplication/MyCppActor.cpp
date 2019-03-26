@@ -96,22 +96,6 @@ void AMyCppActor::GetLifetimeReplicatedProps(TArray < FLifetimeProperty > & OutL
 	DOREPLIFETIME(AMyCppActor, OtherActor);
 }
 
-void AMyCppActor::PostInitializeComponents()
-{
-	Super::PostInitializeComponents();
-
-#if 0
-	if (HasAuthority())
-	{
-		MyObject2 = NewObject<UMyObject2>(this);
-		MyObject2->IntValue = 333;
-
-		OtherActor = GetWorld()->SpawnActor<AMyOtherActor>();
-		OtherActor->IntValue = 8585;
-	}
-#endif
-}
-
 void AMyCppActor::BeginPlay()
 {
 	Super::BeginPlay();
@@ -124,23 +108,11 @@ void AMyCppActor::BeginPlay()
 	{
 		GetWorld()->GetTimerManager().SetTimer(TimerHandle, this, &AMyCppActor::ClientCheckForChangedValues, 1.0, true);
 	}
-
-#if 0
-	if (HasAuthority())
-	{
-		MyObject2 = NewObject<UMyObject2>(this);
-		MyObject2->IntValue = 3330;
-
-		OtherActor = GetWorld()->SpawnActor<AMyOtherActor>();
-		OtherActor->IntValue = 85850;
-	}
-#endif
 }
 
 bool AMyCppActor::ReplicateSubobjects(UActorChannel* Channel, class FOutBunch *Bunch, FReplicationFlags *RepFlags)
 {
 	bool bWroteSomething = Super::ReplicateSubobjects(Channel, Bunch, RepFlags);
-	// UE_LOG(NetTest, Log, TEXT("ReplicateSubs"));
 
 	if (MyObject2)
 	{
@@ -178,45 +150,25 @@ void AMyCppActor::ServerChangeValues()
 		MyObject2->IntValue = 431;
 	}
 
-	if (OtherActor)
-	{
-		OtherActor->IntValue += 20;
-	}
-
 	FActorSpawnParameters p;
 	p.SpawnCollisionHandlingOverride = ESpawnActorCollisionHandlingMethod::AlwaysSpawn;
 	FVector Location = FMath::RandPointInBox(FBox(FVector(-200, -200, 0), FVector(200, 200, 400)));
 	FRotator Rotation = FRotator(0, FMath::RandRange(-45, 45), 0);
 	AMyOtherActor* o = GetWorld()->SpawnActor<AMyOtherActor>(Location, Rotation, p);
 	UE_LOG(NetTest, Log, TEXT("OtherActor Spawned: %p"), o);
-	o->IntValue = IntValue * 10;
-	o->SetLifeSpan(FMath::RandRange(1.f, 4.f));
+	o->IntValue = FMath::RandRange(1, 100) * 10;
+	o->SetLifeSpan(FMath::RandRange(4.f, 8.f));
 
-#if 0
-	if (OtherActor)
+	if (IsValid(OtherActor))
 	{
-		if (OtherActor->IntValue >= 4)
-		{
-			Destroy(OtherActor);
-			OtherActor = nullptr;
-		}
-		else
-		{
-			OtherActor->IntValue++;
-		}
+		OtherActor->IntValue++;
+		UE_LOG(NetTest, Log, TEXT("Server: Incrementing OtherActor->IntValue to %d"), OtherActor->IntValue);
 	}
 	else
 	{
-		FActorSpawnParameters p;
-		//p.Owner = this;
-		p.SpawnCollisionHandlingOverride = ESpawnActorCollisionHandlingMethod::AlwaysSpawn;
-		p.Name = FName(TEXT("MyOtherActor"));
-		AMyOtherActor* o = GetWorld()->SpawnActor<AMyOtherActor>(FVector::ZeroVector, FRotator::ZeroRotator, p);
-		UE_LOG(NetTest, Log, TEXT("OtherActor Spawned: %p"), o);
-		o->IntValue = IntValue * 10;
-		// OtherActor = o;
+		UE_LOG(NetTest, Log, TEXT("Server: Setting OtherActor reference"));
+		OtherActor = o;
 	}
-#endif
 
 	UE_LOG(NetTest, Log, TEXT("Server: Change Values. IntValue=%d"), IntValue);
 }

@@ -77,7 +77,6 @@ class AMyCppActor : public AActor
 
 private:
 
-	void PostInitializeComponents() override;
 	void GetLifetimeReplicatedProps(TArray < FLifetimeProperty > & OutLifetimeProps) const override;
 	void BeginPlay() override;
 
