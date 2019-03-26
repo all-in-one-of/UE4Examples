@@ -5,7 +5,7 @@
 
 #include "MyCppActor.generated.h"
 
-USTRUCT(BlueprintType)
+USTRUCT()
 struct FMyStruct
 {
 	GENERATED_BODY()
@@ -52,7 +52,7 @@ public:
 	UMyObject2();
 };
 
-UCLASS(BlueprintType)
+UCLASS()
 class AMyOtherActor : public AActor
 {
 	GENERATED_BODY()
@@ -70,7 +70,7 @@ public:
 	AMyOtherActor();
 };
 
-UCLASS(BlueprintType)
+UCLASS()
 class AMyCppActor : public AActor
 {
 	GENERATED_BODY()
@@ -79,14 +79,18 @@ private:
 
 	void PostInitializeComponents() override;
 	void GetLifetimeReplicatedProps(TArray < FLifetimeProperty > & OutLifetimeProps) const override;
-	void Tick(float DeltaSeconds) override;
+	void BeginPlay() override;
 
 	// IntValue is used to determine when properties update.
 	int LastIntValue;
 
 	bool ReplicateSubobjects(class UActorChannel* Channel, class FOutBunch *Bunch, FReplicationFlags *RepFlags) override;
 
-public:
+	FTimerHandle TimerHandle;
+	void ServerChangeValues();
+	void ClientCheckForChangedValues();
+
+protected:
 
 	UPROPERTY(Transient, Replicated)
 	int IntValue = 1;
@@ -120,9 +124,6 @@ public:
 
 	UPROPERTY(Transient, Replicated)
 	AMyOtherActor* OtherActor;
-
-	UFUNCTION(BlueprintCallable, BlueprintAuthorityOnly)
-	void ChangeValues();
 
 	AMyCppActor();
 };
