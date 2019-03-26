@@ -38,7 +38,7 @@ AMyOtherActor::AMyOtherActor()
 	UStaticMeshComponent* SM = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("Static Mesh"));
 	SM->SetupAttachment(RootComponent);
 
-	UStaticMesh* Mesh = LoadObject<UStaticMesh>(this, TEXT("StaticMesh'/Engine/ArtTools/RenderToTexture/Meshes/ShadowTestMesh.ShadowTestMesh'"));
+	UStaticMesh* Mesh = LoadObject<UStaticMesh>(this, TEXT("StaticMesh'/Engine/VREditor/BasicMeshes/SM_Ball_01.SM_Ball_01''"));
 	UE_LOG(LogTemp, Log, TEXT("Mesh: %p"), Mesh);
 
 	SM->SetStaticMesh(Mesh);
@@ -67,6 +67,11 @@ AMyCppActor::AMyCppActor()
 	MyObject->IntValue = 3;
 
 	RootComponent = CreateDefaultSubobject<USceneComponent>(TEXT("Root"));
+
+	UStaticMeshComponent *SM = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("Static Mesh Comp"));
+	SM->SetupAttachment(RootComponent);
+	UStaticMesh* Mesh = LoadObject<UStaticMesh>(this, TEXT("StaticMesh'/Engine/VREditor/BasicMeshes/SM_Pyramid_01.SM_Pyramid_01'"));
+	SM->SetStaticMesh(Mesh);
 }
 
 void AMyCppActor::GetLifetimeReplicatedProps(TArray < FLifetimeProperty > & OutLifetimeProps) const
@@ -105,8 +110,6 @@ void AMyCppActor::PostInitializeComponents()
 void AMyCppActor::BeginPlay()
 {
 	Super::BeginPlay();
-
-	UE_LOG(LogTemp, Error, TEXT("HEWRE"));
 
 	if (HasAuthority())
 	{
