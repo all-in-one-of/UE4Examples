@@ -34,6 +34,24 @@ public:
 	UMyObject();
 };
 
+UCLASS()
+class UMyObject2 : public UObject
+{
+	GENERATED_BODY()
+
+private:
+
+	void GetLifetimeReplicatedProps(TArray < FLifetimeProperty > & OutLifetimeProps) const override;
+	bool IsSupportedForNetworking() const override { return true;  }
+
+public:
+
+	UPROPERTY(Transient, Replicated)
+	int IntValue = 1;
+
+	UMyObject2();
+};
+
 UCLASS(BlueprintType)
 class AMyOtherActor : public AActor
 {
@@ -42,6 +60,7 @@ class AMyOtherActor : public AActor
 private:
 
 	void GetLifetimeReplicatedProps(TArray < FLifetimeProperty > & OutLifetimeProps) const override;
+	void BeginPlay() override;
 
 public:
 
@@ -58,11 +77,14 @@ class AMyCppActor : public AActor
 
 private:
 
+	void PostInitializeComponents() override;
 	void GetLifetimeReplicatedProps(TArray < FLifetimeProperty > & OutLifetimeProps) const override;
 	void Tick(float DeltaSeconds) override;
 
 	// IntValue is used to determine when properties update.
 	int LastIntValue;
+
+	bool ReplicateSubobjects(class UActorChannel* Channel, class FOutBunch *Bunch, FReplicationFlags *RepFlags) override;
 
 public:
 
@@ -92,6 +114,9 @@ public:
 
 	UPROPERTY(Transient, Replicated)
 	UMyObject* MyObject;
+
+	UPROPERTY(Transient, Replicated)
+	UMyObject2* MyObject2;
 
 	UPROPERTY(Transient, Replicated)
 	AMyOtherActor* OtherActor;
