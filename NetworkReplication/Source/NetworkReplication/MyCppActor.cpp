@@ -99,6 +99,11 @@ void AMyCppActor::ChangeValues()
 		MyObject2->IntValue = 431;
 	}
 
+	if (OtherActor)
+	{
+		OtherActor->IntValue += 20;
+	}
+
 #if 0
 	if (OtherActor)
 	{
@@ -154,6 +159,9 @@ void AMyCppActor::PostInitializeComponents()
 	{
 		MyObject2 = NewObject<UMyObject2>(this);
 		MyObject2->IntValue = 333;
+
+		OtherActor = GetWorld()->SpawnActor<AMyOtherActor>();
+		OtherActor->IntValue = 8585;
 	}
 }
 
