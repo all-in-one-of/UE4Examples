@@ -7,6 +7,11 @@
 #include "Net/UnrealNetwork.h"
 #include "TimerManager.h"
 
+DECLARE_LOG_CATEGORY_EXTERN(NetTest, Log, All);
+DEFINE_LOG_CATEGORY(NetTest);
+
+
+
 UMyObject::UMyObject()
 {
 }
@@ -38,9 +43,8 @@ AMyOtherActor::AMyOtherActor()
 	UStaticMeshComponent* SM = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("Static Mesh"));
 	SM->SetupAttachment(RootComponent);
 
-	UStaticMesh* Mesh = LoadObject<UStaticMesh>(this, TEXT("StaticMesh'/Engine/VREditor/BasicMeshes/SM_Ball_01.SM_Ball_01''"));
-	UE_LOG(LogTemp, Log, TEXT("Mesh: %p"), Mesh);
-
+	UStaticMesh* Mesh = LoadObject<UStaticMesh>(this, TEXT("StaticMesh'/Engine/VREditor/BasicMeshes/SM_Ball_01.SM_Ball_01'"));
+	check(Mesh);
 	SM->SetStaticMesh(Mesh);
 }
 
@@ -55,7 +59,7 @@ void AMyOtherActor::BeginPlay()
 {
 	Super::BeginPlay();
 
-	UE_LOG(LogTemp, Log, TEXT("BeginPlay %p"), this);
+	UE_LOG(NetTest, Log, TEXT("BeginPlay %p"), this);
 }
 
 AMyCppActor::AMyCppActor()
@@ -71,6 +75,7 @@ AMyCppActor::AMyCppActor()
 	UStaticMeshComponent *SM = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("Static Mesh Comp"));
 	SM->SetupAttachment(RootComponent);
 	UStaticMesh* Mesh = LoadObject<UStaticMesh>(this, TEXT("StaticMesh'/Engine/VREditor/BasicMeshes/SM_Pyramid_01.SM_Pyramid_01'"));
+	check(Mesh);
 	SM->SetStaticMesh(Mesh);
 }
 
@@ -135,7 +140,7 @@ void AMyCppActor::BeginPlay()
 bool AMyCppActor::ReplicateSubobjects(UActorChannel* Channel, class FOutBunch *Bunch, FReplicationFlags *RepFlags)
 {
 	bool bWroteSomething = Super::ReplicateSubobjects(Channel, Bunch, RepFlags);
-	// UE_LOG(LogTemp, Log, TEXT("ReplicateSubs"));
+	// UE_LOG(NetTest, Log, TEXT("ReplicateSubs"));
 
 	if (MyObject2)
 	{
@@ -178,6 +183,15 @@ void AMyCppActor::ServerChangeValues()
 		OtherActor->IntValue += 20;
 	}
 
+	FActorSpawnParameters p;
+	p.SpawnCollisionHandlingOverride = ESpawnActorCollisionHandlingMethod::AlwaysSpawn;
+	FVector Location = FMath::RandPointInBox(FBox(FVector(-200, -200, 0), FVector(200, 200, 400)));
+	FRotator Rotation = FRotator(0, FMath::RandRange(-45, 45), 0);
+	AMyOtherActor* o = GetWorld()->SpawnActor<AMyOtherActor>(Location, Rotation, p);
+	UE_LOG(NetTest, Log, TEXT("OtherActor Spawned: %p"), o);
+	o->IntValue = IntValue * 10;
+	o->SetLifeSpan(FMath::RandRange(1.f, 4.f));
+
 #if 0
 	if (OtherActor)
 	{
@@ -198,13 +212,13 @@ void AMyCppActor::ServerChangeValues()
 		p.SpawnCollisionHandlingOverride = ESpawnActorCollisionHandlingMethod::AlwaysSpawn;
 		p.Name = FName(TEXT("MyOtherActor"));
 		AMyOtherActor* o = GetWorld()->SpawnActor<AMyOtherActor>(FVector::ZeroVector, FRotator::ZeroRotator, p);
-		UE_LOG(LogTemp, Log, TEXT("OtherActor Spawned: %p"), o);
+		UE_LOG(NetTest, Log, TEXT("OtherActor Spawned: %p"), o);
 		o->IntValue = IntValue * 10;
-		OtherActor = o;
+		// OtherActor = o;
 	}
 #endif
 
-	UE_LOG(LogTemp, Log, TEXT("Server: Change Values. IntValue=%d"), IntValue);
+	UE_LOG(NetTest, Log, TEXT("Server: Change Values. IntValue=%d"), IntValue);
 }
 
 void AMyCppActor::ClientCheckForChangedValues()
@@ -212,7 +226,7 @@ void AMyCppActor::ClientCheckForChangedValues()
 	if (LastIntValue != IntValue)
 	{
 		LastIntValue = IntValue;
-		UE_LOG(LogTemp, Log, TEXT("Client: Changed IntValue=%d FloatValue=%.2f VectorValue=(%.2f,%.2f,%.2f) BoolValue=%d FName=%s FString=%s FText=%s MyStruct={%d,%.2f} MyObject=%p={%d} MyObject2=%p={%d} OtherActor=%p={%d}"),
+		UE_LOG(NetTest, Log, TEXT("Client: Changed IntValue=%d FloatValue=%.2f VectorValue=(%.2f,%.2f,%.2f) BoolValue=%d FName=%s FString=%s FText=%s MyStruct={%d,%.2f} MyObject=%p={%d} MyObject2=%p={%d} OtherActor=%p={%d}"),
 			IntValue, FloatValue,
 			VectorValue.X, VectorValue.Y, VectorValue.Z,
 			BoolValue,
@@ -225,6 +239,6 @@ void AMyCppActor::ClientCheckForChangedValues()
 	}
 	else
 	{
-		UE_LOG(LogTemp, Log, TEXT("Client: No change."));
+		UE_LOG(NetTest, Log, TEXT("Client: No change."));
 	}
 }
