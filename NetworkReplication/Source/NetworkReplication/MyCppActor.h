@@ -10,8 +10,45 @@ struct FMyStruct
 {
 	GENERATED_BODY()
 
+	UPROPERTY()
 	int IntValue;
+
+	UPROPERTY()
 	float FloatValue;
+};
+
+UCLASS()
+class UMyObject : public UObject
+{
+	GENERATED_BODY()
+
+private:
+
+	void GetLifetimeReplicatedProps(TArray < FLifetimeProperty > & OutLifetimeProps) const override;
+
+public:
+
+	UPROPERTY(Transient, Replicated)
+	int IntValue = 1;
+
+	UMyObject();
+};
+
+UCLASS(BlueprintType)
+class AMyOtherActor : public AActor
+{
+	GENERATED_BODY()
+
+private:
+
+	void GetLifetimeReplicatedProps(TArray < FLifetimeProperty > & OutLifetimeProps) const override;
+
+public:
+
+	UPROPERTY(Replicated, Transient)
+	int IntValue;
+
+	AMyOtherActor();
 };
 
 UCLASS(BlueprintType)
@@ -29,7 +66,7 @@ private:
 
 public:
 
-	UPROPERTY(Replicated)
+	UPROPERTY(Transient, Replicated)
 	int IntValue = 1;
 
 	UPROPERTY(Transient, Replicated)
@@ -53,8 +90,13 @@ public:
 	UPROPERTY(Transient, Replicated)
 	FMyStruct MyStructValue = { 10, 20.2 };
 
+	UPROPERTY(Transient, Replicated)
+	UMyObject* MyObject;
 
-	UFUNCTION(BlueprintCallable)
+	UPROPERTY(Transient, Replicated)
+	AMyOtherActor* OtherActor;
+
+	UFUNCTION(BlueprintCallable, BlueprintAuthorityOnly)
 	void ChangeValues();
 
 	AMyCppActor();
