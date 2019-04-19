@@ -9,6 +9,9 @@ public class AssetLoadingEditorTarget : TargetRules
 	{
 		Type = TargetType.Editor;
 
-		ExtraModuleNames.AddRange( new string[] { "AssetLoading" } );
+        bUseUnityBuild = false;
+        bUsePCHFiles = false;
+
+        ExtraModuleNames.AddRange( new string[] { "AssetLoading" } );
 	}
 }

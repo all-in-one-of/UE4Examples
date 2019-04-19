@@ -11,6 +11,8 @@ class AMyActor : public AActor
 
 private:
 	AMyActor();
+	void BeginPlay() override;
+	void Tick(float DeltaSeconds) override;
 
 public:
 	UPROPERTY(VisibleAnywhere)
@@ -18,4 +20,24 @@ public:
 
 	UPROPERTY(VisibleAnywhere)
 	class UTexture* Texture;
+
+	UPROPERTY(VisibleAnywhere)
+	class UFontFace* FontFace;
+
+	class UFontFace* LastFontFace = nullptr;
+
+	UPROPERTY(VisibleAnywhere)
+	class UMaterialInterface* Mat;
+
+	class UMaterialInterface* LastMat = nullptr;
+};
+
+UCLASS()
+class UMyObj : public UObject
+{
+	GENERATED_BODY()
+
+public:
+	UMyObj();
+	~UMyObj();
 };
