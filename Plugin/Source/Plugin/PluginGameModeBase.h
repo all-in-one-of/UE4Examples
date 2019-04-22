@@ -13,5 +13,6 @@ UCLASS()
 class PLUGIN_API APluginGameModeBase : public AGameModeBase
 {
 	GENERATED_BODY()
-	
+
+	void BeginPlay() override;
 };

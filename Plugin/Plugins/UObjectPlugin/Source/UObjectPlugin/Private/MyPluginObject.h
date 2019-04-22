@@ -31,6 +31,8 @@ class UMyPluginObject : public UObject
 
 public:
 
+	void Foo();
+
 private:
 
 	UPROPERTY()
