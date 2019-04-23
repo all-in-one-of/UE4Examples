@@ -9,6 +9,6 @@ public class AddingAssetTypesEditorTarget : TargetRules
 	{
 		Type = TargetType.Editor;
 
-		ExtraModuleNames.AddRange( new string[] { "AddingAssetTypes" } );
+		ExtraModuleNames.AddRange( new string[] { "AddingAssetTypes", "MyEditorModule" } );
 	}
 }
