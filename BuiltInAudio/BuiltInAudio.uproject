@@ -3,23 +3,9 @@
 	"EngineAssociation": "4.22",
 	"Category": "",
 	"Description": "",
-	"Modules": [
-	],
 	"Plugins": [
 		{
-			"Name": "Synthesis",
-			"Enabled": true
-		},
-		{
 			"Name": "SoundUtilities",
-			"Enabled": true
-		},
-		{
-			"Name": "SoundVisualizations",
-			"Enabled": true
-		},
-		{
-			"Name": "SteamAudio",
 			"Enabled": true
 		}
 	]
