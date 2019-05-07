@@ -28,3 +28,10 @@ or UPROPERTY marked pointer and do a null check before access.
 If you own the object - it was created with CreateDefaultSubobject in the constructor or
 NewObject(this) somehwere else in your code, then naked pointers are fine (since you know
 when they will become invalid).
+
+## More Information
+
+* [Objects](https://docs.unrealengine.com/en-us/Programming/UnrealArchitecture/Objects)
+* [Unreal Object Handling](https://docs.unrealengine.com/en-US/Programming/UnrealArchitecture/Objects/Optimizations)
+* [Smart Pointer Library](https://docs.unrealengine.com/en-us/Programming/UnrealArchitecture/SmartPointerLibrary)
+
