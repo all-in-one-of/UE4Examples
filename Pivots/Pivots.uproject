@@ -4,13 +4,5 @@
 	"Category": "",
 	"Description": "",
 	"Modules": [
-		{
-			"Name": "Pivots",
-			"Type": "Runtime",
-			"LoadingPhase": "Default",
-			"AdditionalDependencies": [
-				"Engine"
-			]
-		}
 	]
 }
