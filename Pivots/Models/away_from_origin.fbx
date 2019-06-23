@@ -12,9 +12,9 @@ FBXHeaderExtension:  {
 		Month: 6
 		Day: 23
 		Hour: 10
-		Minute: 39
-		Second: 19
-		Millisecond: 324
+		Minute: 48
+		Second: 43
+		Millisecond: 599
 	}
 	Creator: "FBX SDK/FBX Plugins version 2016.1.1"
 	SceneInfo: "SceneInfo::GlobalInfo", "UserData" {
@@ -30,8 +30,8 @@ FBXHeaderExtension:  {
 			Comment: ""
 		}
 		Properties70:  {
-			P: "DocumentUrl", "KString", "Url", "", "E:\UE4Examples\Pivots\HoudiniModels\away_from_origin.fbx"
-			P: "SrcDocumentUrl", "KString", "Url", "", "E:\UE4Examples\Pivots\HoudiniModels\away_from_origin.fbx"
+			P: "DocumentUrl", "KString", "Url", "", "E:\UE4Examples\Pivots\Models\away_from_origin.fbx"
+			P: "SrcDocumentUrl", "KString", "Url", "", "E:\UE4Examples\Pivots\Models\away_from_origin.fbx"
 			P: "Original", "Compound", "", ""
 			P: "Original|ApplicationVendor", "KString", "", "", ""
 			P: "Original|ApplicationName", "KString", "", "", ""
@@ -77,7 +77,7 @@ GlobalSettings:  {
 
 Documents:  {
 	Count: 1
-	Document: 2785049856, "", "Scene" {
+	Document: 2591055104, "", "Scene" {
 		Properties70:  {
 			P: "SourceObject", "object", "", ""
 			P: "ActiveAnimStackName", "KString", "", "", ""
@@ -198,9 +198,9 @@ Definitions:  {
 ;------------------------------------------------------------------
 
 Objects:  {
-	Geometry: 2784704512, "Geometry::transform3", "Mesh" {
+	Geometry: 2587737600, "Geometry::transform3", "Mesh" {
 		Vertices: *54 {
-			a: 5.5,-0.5,-0.5,5.5,0.5,-0.5,4.5,0.5,-0.5,4.5,-0.5,-0.5,4.5,0.5,0.5,4.5,-0.5,0.5,5.5,0.5,0.400000005960464,5.40000009536743,0.5,0.400000005960464,5.40000009536743,0.5,0.5,5.5,-0.5,0.400000005960464,5.40000009536743,-0.5,0.5,5.40000009536743,-0.5,0.400000005960464,5.5,1.5,0.400000005960464,5.5,1.5,0.5,5.40000009536743,1.5,0.5,5.40000009536743,1.5,0.400000005960464,5.5,0.5,0.5,5.5,-0.5,0.5
+			a: 3.5,-0.5,-0.5,3.5,0.5,-0.5,2.5,0.5,-0.5,2.5,-0.5,-0.5,2.5,0.5,0.5,2.5,-0.5,0.5,3.5,0.5,0.400000005960464,3.40000009536743,0.5,0.400000005960464,3.40000009536743,0.5,0.5,3.5,-0.5,0.400000005960464,3.40000009536743,-0.5,0.5,3.40000009536743,-0.5,0.400000005960464,3.5,1.5,0.400000005960464,3.5,1.5,0.5,3.40000009536743,1.5,0.5,3.40000009536743,1.5,0.400000005960464,3.5,0.5,0.5,3.5,-0.5,0.5
 		} 
 		PolygonVertexIndex: *60 {
 			a: 3,2,1,-1,5,4,2,-4,8,7,6,1,2,-5,1,6,9,-1,10,8,4,-6,0,9,11,10,5,-4,15,14,13,-13,7,15,12,-7,6,12,13,-17,16,13,14,-9,8,14,15,-8,17,9,6,-17,10,17,16,-9,9,17,10,-12
@@ -226,7 +226,7 @@ Objects:  {
 			}
 		}
 	}
-	Model: 2784979712, "Model::transform3", "Mesh" {
+	Model: 2587863808, "Model::transform3", "Mesh" {
 		Version: 232
 		Properties70:  {
 			P: "RotationActive", "bool", "", "",1
@@ -246,10 +246,10 @@ Objects:  {
 Connections:  {
 	
 	;Model::transform3, Model::RootNode
-	C: "OO",2784979712,0
+	C: "OO",2587863808,0
 	
 	;Geometry::transform3, Model::transform3
-	C: "OO",2784704512,2784979712
+	C: "OO",2587737600,2587863808
 }
 ;Takes section
 ;----------------------------------------------------
